@@ -44,7 +44,6 @@ module Xcov
         test_logs_path = derived_data_path + "Logs/Test/"
         xccoverage_files = Dir["#{test_logs_path}*.#{extension}", "#{test_logs_path}*.xcresult/*/action.#{extension}"]
       end
-       unless 
       
       extension = Xcov.config[:legacy_support] ? "xccoverage" : "xccovreport"
       
