@@ -37,15 +37,15 @@ module Xcov
 
     def parse_xccoverage
       # Find .xccoverage file
+      extension = Xcov.config[:legacy_support] ? "xccoverage" : "xccovreport"
+      
       if not Xcov.config[:xcresult_path].nil?
         xcresult = Pathname.new(Xcov.config[:xcresult_path])
-        xccoverage_files = Dir["#{xcresult}/*/action.#{extension}"]
+        xccoverage_files = xcresult.flat_map { |e| Dir["#{e}/*/action.#{extension}"] } 
       else
         test_logs_path = derived_data_path + "Logs/Test/"
         xccoverage_files = Dir["#{test_logs_path}*.#{extension}", "#{test_logs_path}*.xcresult/*/action.#{extension}"]
       end
-      
-      extension = Xcov.config[:legacy_support] ? "xccoverage" : "xccovreport"
       
       xccoverage_files = xccoverage_files.sort_by { |filename| File.mtime(filename) }.reverse
 
