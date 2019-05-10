@@ -48,7 +48,7 @@ module Xcov
       
       xccoverage_files = xccoverage_files.sort_by { |filename| File.mtime(filename) }.reverse
 
-      unless test_logs_path.directory? && !xccoverage_files.empty?
+      unless !xccoverage_files.empty?
         ErrorHandler.handle_error("XccoverageFileNotFound")
       end
 
