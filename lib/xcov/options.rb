@@ -76,6 +76,7 @@ module Xcov
         FastlaneCore::ConfigItem.new(
           key: :xcresult_path,
           env_name: "XCOV_XCRESULT_PATH",
+          is_string: false,
           description: "The output from the tests run",
           optional: true
         ),
