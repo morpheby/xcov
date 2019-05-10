@@ -74,6 +74,17 @@ module Xcov
           end
         ),
         FastlaneCore::ConfigItem.new(
+          key: :xcresult_path,
+          env_name: "XCOV_XCRESULT_PATH",
+          description: "The output from the tests run",
+          optional: true,
+          verify_block: proc do |value|
+            v = File.expand_path(value.to_s)
+            raise "Specified directory does not exist".red unless File.exist?(v)
+            raise "Invalid xcresult path, it must point to a directory".red unless File.directory?(v)
+          end
+        ),
+        FastlaneCore::ConfigItem.new(
           key: :output_directory,
           short_option: "-o",
           env_name: "XCOV_OUTPUT_DIRECTORY",
