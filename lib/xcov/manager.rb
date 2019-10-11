@@ -59,7 +59,7 @@ module Xcov
           ErrorHandler.handle_error("XccoverageFileNotFound")
         end
       else
-        if File.extname(path) == '.xcresult'
+        if xccov_file_direct_paths.each { |path| File.extname(path) == '.xcresult' }
           xcresults_to_parse_and_export += xccov_file_direct_paths
         else
           xccoverage_files = xccov_file_direct_paths
